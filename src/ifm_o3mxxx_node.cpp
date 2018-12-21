@@ -12,6 +12,7 @@
 #include "DI_CH08_1_1.h"
 #include "DI_CH08_1_2.h"
 #include "DI_CH08_1_3.h"
+#include "DI_CH08_1_4.h"
 
 #include "sensor_msgs/Image.h"
 #include "sensor_msgs/image_encodings.h"
@@ -266,6 +267,36 @@ int copyChannel8_DIA1_1_3(ifm_o3m_AlgoIFOutput_DIA1_1_3* p)
     return RESULT_OK;
 }
 
+// copy the data for DI structure version 1.4 into our internal structure
+int copyChannel8_DIA1_1_4(ifm_o3m_AlgoIFOutput_DIA1_1_4* p)
+{
+    if (p == NULL)
+        return RESULT_ERROR;
+
+    memcpy(&ifm_ros_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
+    memcpy(&ifm_ros_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
+    memcpy(&ifm_ros_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
+    memcpy(&ifm_ros_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
+    memcpy(&ifm_ros_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
+    memcpy(&ifm_ros_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
+
+    ifm_ros_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
+    ifm_ros_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
+    ifm_ros_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
+    ifm_ros_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
+    ifm_ros_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
+    ifm_ros_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
+
+    ifm_ros_msg.height = p->distanceImageResult.sensorHeight;
+    ifm_ros_msg.width = p->distanceImageResult.sensorWidth;
+    ifm_ros_msg.available = p->distanceImageResult.available;
+
+    memcpy(&ifm_ros_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
+
+
+    return RESULT_OK;
+}
+
 
 // checks which version of the data it is and copies the data into our own structure.
 // You need this for every channel you want to process.
@@ -275,6 +306,7 @@ int processChannel8(void* buf, uint32_t size)
     ifm_o3m_AlgoIFOutput_DIA1_1_1* pDIA1_1_1;
     ifm_o3m_AlgoIFOutput_DIA1_1_2* pDIA1_1_2;
     ifm_o3m_AlgoIFOutput_DIA1_1_3* pDIA1_1_3;
+    ifm_o3m_AlgoIFOutput_DIA1_1_4* pDIA1_1_4;
 
     // Is this DI structure version 1.0?
     pDIA1_1_0 = ifm_o3m_ConvertBufferToLittleEndian_DIA1_1_0(buf, size);
@@ -312,6 +344,13 @@ int processChannel8(void* buf, uint32_t size)
         return RESULT_OK;
     }
 
+    pDIA1_1_4 = ifm_o3m_ConvertBufferToLittleEndian_DIA1_1_4(buf, size);
+    if (pDIA1_1_4)
+    {
+        copyChannel8_DIA1_1_4(pDIA1_1_4);
+        return RESULT_OK;
+    }
+
     // For new versions you have to add the additional converts/copy hier.
 
 
@@ -330,24 +369,24 @@ int main(int argc, char **argv)
     ros::NodeHandle node_priv("~");
 
 
-    string out_imf_depth_image = "";
-    string out_imf_point_cloud = "";
-    string out_imf_raw = "";
+    string out_ifm_depth_image = "";
+    string out_ifm_point_cloud = "";
+    string out_ifm_raw = "";
     string frame_id = "";
 
     int port = 4599;
     string ip = "255.255.255.255";
 
-    node_priv.param("OutDepthImageTopic", out_imf_depth_image, std::string("ifm_o3mxxx_depth_image"));
-    node_priv.param("PointCloudTopic", out_imf_point_cloud, std::string("ifm_o3mxxx_pc"));
-    node_priv.param("RawTopic", out_imf_raw, std::string("ifm_o3mxxx_raw"));
+    node_priv.param("OutDepthImageTopic", out_ifm_depth_image, std::string("ifm_o3mxxx_depth_image"));
+    node_priv.param("PointCloudTopic", out_ifm_point_cloud, std::string("ifm_o3mxxx_pc"));
+    node_priv.param("RawTopic", out_ifm_raw, std::string("ifm_o3mxxx_raw"));
     node_priv.param("Port", port, 4599);
     node_priv.param("IP", ip, std::string("255.255.255.255"));
     node_priv.param("FrameID", frame_id, std::string("ifm"));
 
-    ros::Publisher pub_img = node.advertise<sensor_msgs::Image> (out_imf_depth_image, 1);
-    ros::Publisher pub_pc = node.advertise<sensor_msgs::PointCloud2> (out_imf_point_cloud, 1);
-    ros::Publisher pub_imf_raw = node.advertise<ifm_o3mxxx::IFMO3mxxx> (out_imf_raw, 1);
+    ros::Publisher pub_img = node.advertise<sensor_msgs::Image> (out_ifm_depth_image, 1);
+    ros::Publisher pub_pc = node.advertise<sensor_msgs::PointCloud2> (out_ifm_point_cloud, 1);
+    ros::Publisher pub_ifm_raw = node.advertise<ifm_o3mxxx::IFMO3mxxx> (out_ifm_raw, 1);
 
     UDPReceiver receiver;
     receiver.init(port, ip);
@@ -475,7 +514,7 @@ int main(int argc, char **argv)
 
                         ifm_ros_msg.header.frame_id = frame_id;
                         ifm_ros_msg.header.stamp = img.header.stamp;
-                        pub_imf_raw.publish(ifm_ros_msg);
+                        pub_ifm_raw.publish(ifm_ros_msg);
 
                     }
                 }
