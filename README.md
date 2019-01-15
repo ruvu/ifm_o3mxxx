@@ -1,7 +1,35 @@
 # IFM O3Mxxx drivers for ROS
 
 ## Overview
-This package includes the basic ROS drivers for IFM O3Mxxx for publishing Pointcloud2 messages, depth image and raw message with sensor specific information. It has been tested with O3M150 and O3M250. The code is based on IFM sample codes for parsing the ethernet based communication data. The data is then repacked into ROS compatible formats. 
+This package includes the basic ROS drivers for ifm O3Mxxx for publishing Pointcloud2 messages, depth image and raw message with sensor specific information. It has been tested with O3M150 and O3M250. The code is based on IFM sample codes for parsing the ethernet based communication data. The data is then repacked into ROS compatible formats. 
+
+## Compatible Firmwares
+The O3M supports 3 different firmware types:
+* DI: Pointcloud data + Basic Functions (ROIs and volumentric ROIs)
+* OD: Pointcloud data + Object Detection/Collision Avoidance
+* LD: Pointcloud data + Line Guidance
+
+Current Revision
+----------------
+<table>
+  <tr>
+    <th> Firmware </th>
+    <th> Supported Firmwares </th>
+  </tr>
+  <tr>
+    <td> DI </td>
+    <td> DI_3.7.x, DI_4.10.x, DI_4.17.x, DI_4.21.x </td>
+  </tr>
+  <tr>
+    <td> OD </td>
+    <td> Not yet </td>
+  </tr>
+  <tr>
+    <td> LG </td>
+    <td> Not yet </td>
+  </tr>
+</table>
+
 
 ## Installation
 Download or clone the folder into you workspace. Run catkin_make.
