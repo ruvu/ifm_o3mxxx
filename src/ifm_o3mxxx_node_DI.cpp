@@ -45,8 +45,8 @@ using std::string;
 //    uint16_t height;
 //}__attribute__((packed));
 
-ifm_o3mxxx::ifm_o3mxxx_pointcloud_DI ifm_ros_msg;
-ifm_o3mxxx::ifm_o3mxxx_basicfunctions_DI ifm_ros_msg_bf;
+ifm_o3mxxx::ifm_o3mxxx_pointcloud_DI ifm_pc_di_msg;
+ifm_o3mxxx::ifm_o3mxxx_basicfunctions_DI ifm_bf_di_msg;
 
 //static distanceData_t distanceData;
 
@@ -154,25 +154,25 @@ int copyChannel8_DIA1_1_0(ifm_o3m_AlgoIFOutput_DIA1_1_0* p)
     if (p == NULL)
         return RESULT_ERROR;
 
-    memcpy(&ifm_ros_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
-    memcpy(&ifm_ros_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
-    memcpy(&ifm_ros_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
-    memcpy(&ifm_ros_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
-    memcpy(&ifm_ros_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
-    memcpy(&ifm_ros_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
+    memcpy(&ifm_pc_di_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
+    memcpy(&ifm_pc_di_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
+    memcpy(&ifm_pc_di_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
+    memcpy(&ifm_pc_di_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
+    memcpy(&ifm_pc_di_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
+    memcpy(&ifm_pc_di_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
 
-    ifm_ros_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
-    ifm_ros_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
-    ifm_ros_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
-    ifm_ros_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
-    ifm_ros_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
-    ifm_ros_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
+    ifm_pc_di_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
+    ifm_pc_di_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
+    ifm_pc_di_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
+    ifm_pc_di_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
+    ifm_pc_di_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
+    ifm_pc_di_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
 
-    ifm_ros_msg.height = p->distanceImageResult.sensorHeight;
-    ifm_ros_msg.width = p->distanceImageResult.sensorWidth;
-    ifm_ros_msg.available = p->distanceImageResult.available;
+    ifm_pc_di_msg.height = p->distanceImageResult.sensorHeight;
+    ifm_pc_di_msg.width = p->distanceImageResult.sensorWidth;
+    ifm_pc_di_msg.available = p->distanceImageResult.available;
 
-    memcpy(&ifm_ros_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
+    memcpy(&ifm_pc_di_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
 
 
     return RESULT_OK;
@@ -185,25 +185,25 @@ int copyChannel8_DIA1_1_1(ifm_o3m_AlgoIFOutput_DIA1_1_1* p)
     if (p == NULL)
         return RESULT_ERROR;
 
-    memcpy(&ifm_ros_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
-    memcpy(&ifm_ros_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
-    memcpy(&ifm_ros_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
-    memcpy(&ifm_ros_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
-    memcpy(&ifm_ros_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
-    memcpy(&ifm_ros_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
+    memcpy(&ifm_pc_di_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
+    memcpy(&ifm_pc_di_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
+    memcpy(&ifm_pc_di_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
+    memcpy(&ifm_pc_di_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
+    memcpy(&ifm_pc_di_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
+    memcpy(&ifm_pc_di_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
 
-    ifm_ros_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
-    ifm_ros_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
-    ifm_ros_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
-    ifm_ros_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
-    ifm_ros_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
-    ifm_ros_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
+    ifm_pc_di_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
+    ifm_pc_di_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
+    ifm_pc_di_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
+    ifm_pc_di_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
+    ifm_pc_di_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
+    ifm_pc_di_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
 
-    ifm_ros_msg.height = p->distanceImageResult.sensorHeight;
-    ifm_ros_msg.width = p->distanceImageResult.sensorWidth;
-    ifm_ros_msg.available = p->distanceImageResult.available;
+    ifm_pc_di_msg.height = p->distanceImageResult.sensorHeight;
+    ifm_pc_di_msg.width = p->distanceImageResult.sensorWidth;
+    ifm_pc_di_msg.available = p->distanceImageResult.available;
 
-    memcpy(&ifm_ros_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
+    memcpy(&ifm_pc_di_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
 
 
     return RESULT_OK;
@@ -215,25 +215,25 @@ int copyChannel8_DIA1_1_2(ifm_o3m_AlgoIFOutput_DIA1_1_2* p)
     if (p == NULL)
         return RESULT_ERROR;
 
-    memcpy(&ifm_ros_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
-    memcpy(&ifm_ros_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
-    memcpy(&ifm_ros_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
-    memcpy(&ifm_ros_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
-    memcpy(&ifm_ros_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
-    memcpy(&ifm_ros_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
+    memcpy(&ifm_pc_di_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
+    memcpy(&ifm_pc_di_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
+    memcpy(&ifm_pc_di_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
+    memcpy(&ifm_pc_di_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
+    memcpy(&ifm_pc_di_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
+    memcpy(&ifm_pc_di_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
 
-    ifm_ros_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
-    ifm_ros_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
-    ifm_ros_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
-    ifm_ros_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
-    ifm_ros_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
-    ifm_ros_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
+    ifm_pc_di_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
+    ifm_pc_di_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
+    ifm_pc_di_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
+    ifm_pc_di_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
+    ifm_pc_di_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
+    ifm_pc_di_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
 
-    ifm_ros_msg.height = p->distanceImageResult.sensorHeight;
-    ifm_ros_msg.width = p->distanceImageResult.sensorWidth;
-    ifm_ros_msg.available = p->distanceImageResult.available;
+    ifm_pc_di_msg.height = p->distanceImageResult.sensorHeight;
+    ifm_pc_di_msg.width = p->distanceImageResult.sensorWidth;
+    ifm_pc_di_msg.available = p->distanceImageResult.available;
 
-    memcpy(&ifm_ros_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
+    memcpy(&ifm_pc_di_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
 
 
     return RESULT_OK;
@@ -245,25 +245,25 @@ int copyChannel8_DIA1_1_3(ifm_o3m_AlgoIFOutput_DIA1_1_3* p)
     if (p == NULL)
         return RESULT_ERROR;
 
-    memcpy(&ifm_ros_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
-    memcpy(&ifm_ros_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
-    memcpy(&ifm_ros_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
-    memcpy(&ifm_ros_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
-    memcpy(&ifm_ros_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
-    memcpy(&ifm_ros_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
+    memcpy(&ifm_pc_di_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
+    memcpy(&ifm_pc_di_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
+    memcpy(&ifm_pc_di_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
+    memcpy(&ifm_pc_di_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
+    memcpy(&ifm_pc_di_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
+    memcpy(&ifm_pc_di_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
 
-    ifm_ros_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
-    ifm_ros_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
-    ifm_ros_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
-    ifm_ros_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
-    ifm_ros_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
-    ifm_ros_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
+    ifm_pc_di_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
+    ifm_pc_di_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
+    ifm_pc_di_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
+    ifm_pc_di_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
+    ifm_pc_di_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
+    ifm_pc_di_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
 
-    ifm_ros_msg.height = p->distanceImageResult.sensorHeight;
-    ifm_ros_msg.width = p->distanceImageResult.sensorWidth;
-    ifm_ros_msg.available = p->distanceImageResult.available;
+    ifm_pc_di_msg.height = p->distanceImageResult.sensorHeight;
+    ifm_pc_di_msg.width = p->distanceImageResult.sensorWidth;
+    ifm_pc_di_msg.available = p->distanceImageResult.available;
 
-    memcpy(&ifm_ros_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
+    memcpy(&ifm_pc_di_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
 
 
     return RESULT_OK;
@@ -275,25 +275,25 @@ int copyChannel8_DIA1_1_4(ifm_o3m_AlgoIFOutput_DIA1_1_4* p)
     if (p == NULL)
         return RESULT_ERROR;
 
-    memcpy(&ifm_ros_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
-    memcpy(&ifm_ros_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
-    memcpy(&ifm_ros_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
-    memcpy(&ifm_ros_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
-    memcpy(&ifm_ros_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
-    memcpy(&ifm_ros_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
+    memcpy(&ifm_pc_di_msg.distance_data[0], p->distanceImageResult.distanceData, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.distanceData)));
+    memcpy(&ifm_pc_di_msg.confidence[0], p->distanceImageResult.confidence, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.confidence)));
+    memcpy(&ifm_pc_di_msg.amplitude[0], p->distanceImageResult.amplitude, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.amplitude)));
+    memcpy(&ifm_pc_di_msg.x[0], p->distanceImageResult.X, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.X)));
+    memcpy(&ifm_pc_di_msg.y[0], p->distanceImageResult.Y, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Y)));
+    memcpy(&ifm_pc_di_msg.z[0], p->distanceImageResult.Z, NUM_SENSOR_PIXELS*sizeof(*(p->distanceImageResult.Z)));
 
-    ifm_ros_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
-    ifm_ros_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
-    ifm_ros_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
-    ifm_ros_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
-    ifm_ros_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
-    ifm_ros_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
+    ifm_pc_di_msg.trans_x = p->distanceImageResult.cameraCalibration.transX;
+    ifm_pc_di_msg.trans_y = p->distanceImageResult.cameraCalibration.transY;
+    ifm_pc_di_msg.trans_z = p->distanceImageResult.cameraCalibration.transZ;
+    ifm_pc_di_msg.rot_x = p->distanceImageResult.cameraCalibration.rotX;
+    ifm_pc_di_msg.rot_y = p->distanceImageResult.cameraCalibration.rotY;
+    ifm_pc_di_msg.rot_z = p->distanceImageResult.cameraCalibration.rotZ;
 
-    ifm_ros_msg.height = p->distanceImageResult.sensorHeight;
-    ifm_ros_msg.width = p->distanceImageResult.sensorWidth;
-    ifm_ros_msg.available = p->distanceImageResult.available;
+    ifm_pc_di_msg.height = p->distanceImageResult.sensorHeight;
+    ifm_pc_di_msg.width = p->distanceImageResult.sensorWidth;
+    ifm_pc_di_msg.available = p->distanceImageResult.available;
 
-    memcpy(&ifm_ros_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
+    memcpy(&ifm_pc_di_msg.amplitude_normalization[0], p->distanceImageResult.amplitude_normalization, 4*sizeof(*(p->distanceImageResult.amplitude_normalization)));
 
 
     return RESULT_OK;
@@ -511,14 +511,14 @@ int main(int argc, char **argv)
                         img.encoding = sensor_msgs::image_encodings::TYPE_32FC1;
                         img.data.resize(NUM_SENSOR_PIXELS*4);
                         for(unsigned int i = 0 ; i < NUM_SENSOR_PIXELS; ++i){
-                            //img.data.at(i) = (static_cast<float>(ifm_ros_msg.distance_data[i])/100.0);
-                            //img.data.at(i*2) = static_cast<uint16_t>(ifm_ros_msg.distance_data[i]);
-                            float32_t pixel = static_cast<float32_t>(ifm_ros_msg.distance_data[i])/100;
+                            //img.data.at(i) = (static_cast<float>(ifm_pc_di_msg.distance_data[i])/100.0);
+                            //img.data.at(i*2) = static_cast<uint16_t>(ifm_pc_di_msg.distance_data[i]);
+                            float32_t pixel = static_cast<float32_t>(ifm_pc_di_msg.distance_data[i])/100;
                             memcpy(&(img.data.at(i*4)), &pixel, sizeof(float32_t) );
                         }
 
-                        img.height = ifm_ros_msg.height;
-                        img.width = ifm_ros_msg.width;
+                        img.height = ifm_pc_di_msg.height;
+                        img.width = ifm_pc_di_msg.width;
                         img.step = img.width*4;
 
                         pub_img.publish(img);
@@ -528,12 +528,12 @@ int main(int argc, char **argv)
 
                         pcl::PointXYZI point;
                         for(unsigned int i = 0 ; i < NUM_SENSOR_PIXELS; ++i){
-                            if(ifm_ros_msg.confidence[i] & confidence1 || ifm_ros_msg.confidence[i] & confidence4096) // invalid pixel
+                            if(ifm_pc_di_msg.confidence[i] & confidence1 || ifm_pc_di_msg.confidence[i] & confidence4096) // invalid pixel
                                 continue;
-                            point.x = ifm_ros_msg.x[i];
-                            point.y = ifm_ros_msg.y[i];
-                            point.z = ifm_ros_msg.z[i];
-                            point.intensity = ifm_ros_msg.amplitude[i];
+                            point.x = ifm_pc_di_msg.x[i];
+                            point.y = ifm_pc_di_msg.y[i];
+                            point.z = ifm_pc_di_msg.z[i];
+                            point.intensity = ifm_pc_di_msg.amplitude[i];
                             pcl_cloud.push_back(point);
                         }
 
@@ -542,14 +542,12 @@ int main(int argc, char **argv)
                         cloud.header.stamp = img.header.stamp;
                         pub_pc.publish(cloud);
 
-                        ifm_ros_msg.header.frame_id = frame_id;
-                        ifm_ros_msg.header.stamp = img.header.stamp;
-                        pub_ifm_raw.publish(ifm_ros_msg);
-
+                        ifm_pc_di_msg.header.frame_id = frame_id;
+                        ifm_pc_di_msg.header.stamp = img.header.stamp;
+                        pub_ifm_raw.publish(ifm_pc_di_msg);
                     }
                     else if(ph->ChannelID == functionDataChannel)
                     {
-
                     }
                 }
             }

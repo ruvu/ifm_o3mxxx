@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <node name="ifm_o3mxxx" pkg="ifm_o3mxxx" type="ifm_o3mxxx_node" output="screen">
+    <node name="ifm_o3mxxx" pkg="ifm_o3mxxx" type="ifm_o3mxxx_node_DI" output="screen">
         <param name="Port" value="42000" />
         <param name="IP" value="255.255.255.255" />
         <param name="OutDepthImageTopic" value="ifm_o3mxxx/depth/raw" />

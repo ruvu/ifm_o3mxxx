@@ -53,7 +53,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
    FILES
-   IFMO3mxxx.msg
+   ifm_o3mxxx_pointcloud_DI.msg
+   ifm_o3mxxx_basicfunctions_DI.msg
    #   Message2.msg
 )
 
@@ -124,7 +125,7 @@ catkin_package(
 # include_directories(include)
 include_directories(
   include
-  include/ifm
+  include/ifm/DI
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -141,7 +142,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/udpreceiver.cpp src/DI_CH08_1_0.cpp src/DI_CH08_1_1.cpp src/DI_CH08_1_2.cpp src/DI_CH08_1_3.cpp src/DI_CH08_1_4.cpp src/ifm_o3mxxx_node.cpp)
+add_executable(${PROJECT_NAME}_node_DI src/udpreceiver.cpp src/DI/DI_CH08_1_0.cpp src/DI/DI_CH08_1_1.cpp src/DI/DI_CH08_1_2.cpp src/DI/DI_CH08_1_3.cpp src/DI/DI_CH08_1_4.cpp src/ifm_o3mxxx_node_DI.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -151,10 +152,10 @@ add_executable(${PROJECT_NAME}_node src/udpreceiver.cpp src/DI_CH08_1_0.cpp src/
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_node_DI ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_node
+target_link_libraries(${PROJECT_NAME}_node_DI
   ${catkin_LIBRARIES}
 )
 
